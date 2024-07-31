@@ -1,7 +1,8 @@
 Install node modules that are not here - npm install 
-To start the server, open the terminal, and run the command - node server.mjs 
-To start the client, open a new terminal and run the command - node client.mjs
+To start the server, open the terminal, and run the command- node server.mjs 
+To start the client, open a new terminal and run the command- node client.mjs
 Install other dependencies if needed - npm init -y
+import cors middleware- npm install cors   // for fetching data smoothly from external sources and also ensures ports should be same for front-end and back-end
 
 
 
