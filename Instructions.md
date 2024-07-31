@@ -8,6 +8,13 @@ import cors middleware- npm install cors   // for fetching data smoothly from ex
 
 
 
+
+For the front end create a subfolder and paste  ( script, styles, and index file there ), and the folder should be inside the main project folder where the back-end subfolder is also located 
+
+
+
+
+
  \\ All data will be fetched by API to the console screen and if not you can search to get a response in Postman, through this URL:
 
 http://localhost:3000/mainnet/activity?wallet_address=4UYjrT5hmMTh9pLFg1Mxh49besnAeCc23qFoZc6WnQkK&network=Solana
