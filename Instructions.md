@@ -9,7 +9,7 @@ import cors middleware- npm install cors   // for fetching data smoothly from ex
 
 
 
-For the front end create a subfolder and paste  ( script, styles, and index file there ), and the folder should be inside the main project folder where the back-end subfolder is also located 
+For the front end create a subfolder and paste  ( script, styles, and index file there ), and the folder should be inside the main project folder where the back-end subfolder is also located.
 
 
 
