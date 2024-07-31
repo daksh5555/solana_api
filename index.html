@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Activity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .transaction {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .transaction h2 {
+            margin-top: 0;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transaction Activity</h1>
+    <div id="content"></div>
+    <div id="error" class="error"></div>
+
+    <script>
+        const fetchActivity = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/mainnet/activity?wallet_address=4UYjrT5hmMTh9pLFg1Mxh49besnAeCc23qFoZc6WnQkK&network=Solana');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+                document.getElementById('error').textContent = 'Failed to retrieve data';
+                return null;
+            }
+        };
+
+        const displayActivity = (data) => {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = ''; // Clear previous content
+            if (data && data.data && Array.isArray(data.data)) {
+                data.data.forEach(transaction => {
+                    const transactionDiv = document.createElement('div');
+                    transactionDiv.className = 'transaction';
+                    
+                    transactionDiv.innerHTML = `
+                        <h2>Transaction UUID: ${transaction.uuid}</h2>
+                        <p><strong>Timestamp:</strong> ${transaction.timestamp}</p>
+                        <p><strong>Type:</strong> ${transaction.type}</p>
+                        <p><strong>Amount:</strong> ${transaction.metadata.amount}</p>
+                        <p><strong>Token Name:</strong> ${transaction.token.name}</p>
+                        <p><strong>Explorer URL:</strong> <a href="${transaction.explorer_url}" target="_blank">${transaction.explorer_url}</a></p>
+                    `;
+                    contentDiv.appendChild(transactionDiv);
+                });
+            } else {
+                contentDiv.innerHTML = '<p>No transactions available.</p>';
+            }
+        };
+
+        (async () => {
+            const result = await fetchActivity();
+            if (result) {
+                displayActivity(result);
+            }
+        })();
+    </script>
+</body>
+</html>
